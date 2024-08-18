@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customizable Backpack</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        .backpack-preview {
+            width: 300px;
+            height: 400px;
+            background-color: #f3f4f6; /* Light gray background */
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            position: relative;
+            margin: auto;
+        }
+        .name-preview {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .logo-preview {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            background-color: transparent;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+<div class="container mx-auto p-8">
+    <h1 class="text-3xl font-bold text-center mb-8">Customize Your Backpack</h1>
+
+    <div class="flex flex-col md:flex-row justify-center items-start gap-10">
+        <div class="backpack-preview shadow-lg">
+            <div class="logo-preview" id="logoPreview"></div>
+            <div class="name-preview" id="namePreview">Your Name</div>
+        </div>
+
+        <div class="flex flex-col gap-6">
+            <div>
+                <label class="block text-lg font-medium">Select Name Color</label>
+                <select id="nameColor" class="mt-1 p-2 border border-gray-300 rounded-md">
+                    <option value="#FFD700">Gold</option>
+                    <option value="#FFFFFF">White Glitter</option>
+                    <option value="#000000">Black Glitter</option>
+                    <option value="#0000FF">Blue</option>
+                    <option value="#FFC0CB">Pink</option>
+                    <option value="#FF00FF">Fuchsia</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-lg font-medium">Select Font</label>
+                <select id="fontSelect" class="mt-1 p-2 border border-gray-300 rounded-md">
+                    <option value="font-sans">Sans Serif</option>
+                    <option value="font-serif">Serif</option>
+                    <option value="font-mono">Monospace</option>
+                    <!-- Add more font options as needed -->
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-lg font-medium">Select Logo Color</label>
+                <select id="logoColor" class="mt-1 p-2 border border-gray-300 rounded-md">
+                    <option value="mermaid">Mermaid</option>
+                    <option value="onyx">Onyx Black</option>
+                    <option value="iridescent">Iridescent</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const namePreview = document.getElementById('namePreview');
+    const logoPreview = document.getElementById('logoPreview');
+    
+    document.getElementById('nameColor').addEventListener('change', function() {
+        namePreview.style.color = this.value;
+    });
+
+    document.getElementById('fontSelect').addEventListener('change', function() {
+        namePreview.className = `name-preview ${this.value}`;
+    });
+
+    document.getElementById('logoColor').addEventListener('change', function() {
+        logoPreview.style.backgroundColor = getColor(this.value);
+    });
+
+    function getColor(value) {
+        switch(value) {
+            case 'mermaid':
+                return '#3CB371'; // Example color for mermaid
+            case 'onyx':
+                return '#353839'; // Example color for onyx black
+            case 'iridescent':
+                return '#C0C0C0'; // Example color for iridescent
+            default:
+                return 'transparent';
+        }
+    }
+</script>
+
+</body>
+</html>
