@@ -5,40 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customizable Backpack</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        /* Custom Styles */
-        .backpack-preview {
-            width: 300px;
-            height: 400px;
-            background-color: #f3f4f6; /* Light gray background */
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            position: relative;
-            margin: auto;
-        }
-        .name-preview {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-        }
-        .logo-preview {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 80px;
-            background-color: transparent;
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
 </head>
 <body class="bg-gray-100">
 
@@ -46,41 +12,68 @@
     <h1 class="text-3xl font-bold text-center mb-8">Customize Your Backpack</h1>
 
     <div class="flex flex-col md:flex-row justify-center items-start gap-10">
-        <div class="backpack-preview shadow-lg">
-            <div class="logo-preview" id="logoPreview"></div>
-            <div class="name-preview" id="namePreview">Your Name</div>
+        <div class="w-72 h-96 bg-center bg-cover border border-gray-300 rounded-lg shadow-lg relative"
+             style="background-image: url('https://images.unsplash.com/photo-1546938576-6e6a64f317cc?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+            <div class="absolute top-5 left-1/2 transform -translate-x-1/2 w-20 h-20 flex justify-center items-center rounded-lg" id="logoPreview"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl font-bold text-center" id="namePreview">Your Name</div>
         </div>
 
         <div class="flex flex-col gap-6">
             <div>
-                <label class="block text-lg font-medium">Select Name Color</label>
-                <select id="nameColor" class="mt-1 p-2 border border-gray-300 rounded-md">
-                    <option value="#FFD700">Gold</option>
-                    <option value="#FFFFFF">White Glitter</option>
-                    <option value="#000000">Black Glitter</option>
-                    <option value="#0000FF">Blue</option>
-                    <option value="#FFC0CB">Pink</option>
-                    <option value="#FF00FF">Fuchsia</option>
-                </select>
+                <label class="block text-lg font-medium mb-2">Select Name Color</label>
+                <div class="flex flex-wrap space-x-4">
+                    <div class="text-center">
+                        <button class="w-10 h-10 rounded-full bg-yellow-400 mb-1" onclick="setNameColor('#FFD700')"></button>
+                        <span class="text-sm">Gold</span>
+                    </div>
+                    <div class="text-center">
+                        <button class="w-10 h-10 rounded-full bg-white border mb-1" onclick="setNameColor('#FFFFFF')"></button>
+                        <span class="text-sm">White Glitter</span>
+                    </div>
+                    <div class="text-center">
+                        <button class="w-10 h-10 rounded-full bg-black mb-1" onclick="setNameColor('#000000')"></button>
+                        <span class="text-sm">Black Glitter</span>
+                    </div>
+                    <div class="text-center">
+                        <button class="w-10 h-10 rounded-full bg-blue-500 mb-1" onclick="setNameColor('#0000FF')"></button>
+                        <span class="text-sm">Blue</span>
+                    </div>
+                    <div class="text-center">
+                        <button class="w-10 h-10 rounded-full bg-pink-400 mb-1" onclick="setNameColor('#FFC0CB')"></button>
+                        <span class="text-sm">Pink</span>
+                    </div>
+                    <div class="text-center">
+                        <button class="w-10 h-10 rounded-full bg-pink-600 mb-1" onclick="setNameColor('#FF00FF')"></button>
+                        <span class="text-sm">Fuchsia</span>
+                    </div>
+                </div>
             </div>
 
             <div>
-                <label class="block text-lg font-medium">Select Font</label>
-                <select id="fontSelect" class="mt-1 p-2 border border-gray-300 rounded-md">
-                    <option value="font-sans">Sans Serif</option>
-                    <option value="font-serif">Serif</option>
-                    <option value="font-mono">Monospace</option>
-                    <!-- Add more font options as needed -->
-                </select>
+                <label class="block text-lg font-medium mb-2">Select Font</label>
+                <div class="flex flex-wrap space-x-4">
+                    <button class="p-2 rounded-md border" onclick="setFont('font-sans')">Sans Serif</button>
+                    <button class="p-2 rounded-md border" onclick="setFont('font-serif')">Serif</button>
+                    <button class="p-2 rounded-md border" onclick="setFont('font-mono')">Monospace</button>
+                </div>
             </div>
 
             <div>
-                <label class="block text-lg font-medium">Select Logo Color</label>
-                <select id="logoColor" class="mt-1 p-2 border border-gray-300 rounded-md">
-                    <option value="mermaid">Mermaid</option>
-                    <option value="onyx">Onyx Black</option>
-                    <option value="iridescent">Iridescent</option>
-                </select>
+                <label class="block text-lg font-medium mb-2">Select Logo Color</label>
+                <div class="flex flex-wrap space-x-4">
+                    <div class="text-center">
+                        <button class="w-10 h-10 rounded-full bg-green-500 mb-1" onclick="setLogoColor('mermaid')"></button>
+                        <span class="text-sm">Mermaid</span>
+                    </div>
+                    <div class="text-center">
+                        <button class="w-10 h-10 rounded-full bg-gray-800 mb-1" onclick="setLogoColor('onyx')"></button>
+                        <span class="text-sm">Onyx Black</span>
+                    </div>
+                    <div class="text-center">
+                        <button class="w-10 h-10 rounded-full bg-gray-400 mb-1" onclick="setLogoColor('iridescent')"></button>
+                        <span class="text-sm">Iridescent</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -90,26 +83,26 @@
     const namePreview = document.getElementById('namePreview');
     const logoPreview = document.getElementById('logoPreview');
     
-    document.getElementById('nameColor').addEventListener('change', function() {
-        namePreview.style.color = this.value;
-    });
+    function setNameColor(color) {
+        namePreview.style.color = color;
+    }
 
-    document.getElementById('fontSelect').addEventListener('change', function() {
-        namePreview.className = `name-preview ${this.value}`;
-    });
+    function setFont(fontClass) {
+        namePreview.className = `absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl font-bold text-center ${fontClass}`;
+    }
 
-    document.getElementById('logoColor').addEventListener('change', function() {
-        logoPreview.style.backgroundColor = getColor(this.value);
-    });
+    function setLogoColor(value) {
+        logoPreview.style.backgroundColor = getColor(value);
+    }
 
     function getColor(value) {
         switch(value) {
             case 'mermaid':
-                return '#3CB371'; // Example color for mermaid
+                return '#3CB371'; // Mermaid color
             case 'onyx':
-                return '#353839'; // Example color for onyx black
+                return '#353839'; // Onyx Black
             case 'iridescent':
-                return '#C0C0C0'; // Example color for iridescent
+                return '#C0C0C0'; // Iridescent
             default:
                 return 'transparent';
         }
