@@ -14,13 +14,12 @@
     <div class="flex flex-col md:flex-row justify-center items-start gap-10">
         <div class="w-72 h-96 bg-center bg-cover border border-gray-300 rounded-lg shadow-lg relative"
              style="background-image: url('https://images.unsplash.com/photo-1546938576-6e6a64f317cc?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
-             <div class="absolute top-[35%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+            <div class="absolute top-[35%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
                 <div id="logoPreview" class="w-5 h-5">
                     <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e8eaed" style="opacity: 0.8;"><path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z"/></svg>
                 </div>
                 <div class="text-sm font-bold text-center text-white" id="namePreview" style="opacity: 0.8;">Your Name</div>
             </div>
-            
         </div>
 
         <div class="flex flex-col gap-6 ">
@@ -80,6 +79,16 @@
                     </div>
                 </div>
             </div>
+
+            <div>
+                <label class="block text-lg font-medium mb-2">Custom Name (Additional $10)</label>
+                <input type="text" id="customNameInput" class="w-full p-2 border rounded-md" placeholder="Enter your name" oninput="updateCustomName()" maxlength="10">
+                <p class="text-xs text-red-500 mt-1">Adding a custom name will increase the price by $10. (Max 10 characters)</p>
+            </div>
+
+            <div class="mt-4">
+                <h2 class="text-xl font-bold">Total Price: $<span id="totalPrice">50</span></h2>
+            </div>
         </div>
     </div>
 </div>
@@ -87,6 +96,11 @@
 <script>
     const namePreview = document.getElementById('namePreview');
     const logoPreview = document.querySelector('#logoPreview svg path');
+    const customNameInput = document.getElementById('customNameInput');
+    const totalPriceElement = document.getElementById('totalPrice');
+    let basePrice = 50;
+    let customNamePrice = 15;
+    let isCustomNameAdded = false;
 
     function setNameColor(color) {
         namePreview.style.color = color;
@@ -98,6 +112,19 @@
 
     function setLogoColor(color) {
         logoPreview.setAttribute('fill', color);
+    }
+
+    function updateCustomName() {
+        const name = customNameInput.value;
+        namePreview.textContent = name || 'Your Name';
+
+        if (name && !isCustomNameAdded) {
+            totalPriceElement.textContent = basePrice + customNamePrice;
+            isCustomNameAdded = true;
+        } else if (!name && isCustomNameAdded) {
+            totalPriceElement.textContent = basePrice;
+            isCustomNameAdded = false;
+        }
     }
 </script>
 
